@@ -21,7 +21,7 @@ export default function Login() {
       console.log(result);
       if(result.status === 200){
         console.log(result.data.token);
-        navigate("/hoje");
+        navigate("/habitos");
       }
     });
   }  
@@ -29,7 +29,7 @@ export default function Login() {
     return (
       <>
       <Iconeprincipal>
-          <img src=""/>
+          <img src="" alt =""/>
           <h1>TrackIt</h1>
       </Iconeprincipal>
       <Entradas>
