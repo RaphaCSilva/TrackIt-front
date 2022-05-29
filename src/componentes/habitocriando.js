@@ -5,7 +5,15 @@ import { Navigate, useNavigate, Link } from "react-router-dom";
 import BotaoDia from "./botaodia";
 
 export default function Habitocriando(props) {
-    
+  
+  let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQzNywiaWF0IjoxNjUzODA1OTIyfQ.c-SP3QKVcwmhO1hwsD4VjQi4ZidF5k2xyx0r5aOO7tI";
+  const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
+  const config = {
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  }
+
   const [texthbt, setTexthbt] = React.useState("");
   const [arr, setArr] = React.useState([]);
   const semana = ["D", "S", "T", "Q", "Q", "S", "S"]
@@ -19,7 +27,11 @@ export default function Habitocriando(props) {
       days: arr
     }
     setTexthbt("");
-    console.log(obj);
+    jogapraCima();
+    const response = axios.post(URL, obj, config);
+    response.then( result => {
+      console.log(result);
+    });
   }
   function montaArr(num){
     setArr([...arr, num]);

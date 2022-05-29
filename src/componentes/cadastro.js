@@ -24,7 +24,7 @@ export default function Cadastro() {
     const response = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', obj);
     response.then( result => {
       console.log(result);
-      if(result.status === 200){
+      if(result.status === 201){
         navigate("/");
       }
     });

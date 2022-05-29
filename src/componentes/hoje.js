@@ -4,10 +4,12 @@ import styled from 'styled-components';
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import Footer from "./footer";
 import Toper from "./toper";
+import dayjs from "dayjs";
 
 export default function Hoje() {
   let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQzNywiaWF0IjoxNjUzNzY0OTAyfQ.2ObdnB0Vj402NpERhqdIl5oc41gUvKtdyJWEfCOcOyk"
-    
+  let hoje = dayjs({});
+  console.log(hoje);
 
     return(
       <>

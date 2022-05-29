@@ -9,15 +9,22 @@ import Habitocriando from "./habitocriando";
 
 export default function Habitos() {
     
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQzNywiaWF0IjoxNjUzNzY0OTAyfQ.2ObdnB0Vj402NpERhqdIl5oc41gUvKtdyJWEfCOcOyk"
-    let test = [
-      {
-        id: 1,
-        name: "Nome do hábito",
-        days: [6, 4, 1]
-      }
-    ];
+
     const [clicou, setClicou] = React.useState(false);
+    const [test, setTest] = React.useState([]);
+
+
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQzNywiaWF0IjoxNjUzODA1OTIyfQ.c-SP3QKVcwmhO1hwsD4VjQi4ZidF5k2xyx0r5aOO7tI";
+    const config = {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    }
+    const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
+    const response = axios.get(URL, config);
+    response.then( result => {
+      setTest(result.data);
+    });
 
     function adicionarhabito(){
       setClicou(true);
@@ -42,7 +49,7 @@ export default function Habitos() {
         </Menusuperior>
         <EspaçoHabitos>
           {(clicou === true) && <Habitocriando cancelou = {fechahabito}/>}
-          {test.map((habit, index)=> <Habito key = {index} text = {habit.name} semana = {habit.days} index = {index}/>)}
+          {(test !== undefined) && test.map((habit, index)=> <Habito key = {index} text = {habit.name} semana = {habit.days} index = {index}/>)}
         </EspaçoHabitos>
       </Container>
       <Footer/>

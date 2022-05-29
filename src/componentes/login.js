@@ -2,27 +2,37 @@ import React from "react";
 import axios from 'axios';
 import styled from 'styled-components';
 import { Navigate , useNavigate, Link } from "react-router-dom";
+import Loader from "./loader";
 
 export default function Login() {
   
   const [email, setEmail] = React.useState("");
   const [senha, setSenha] = React.useState("");
+  const [load, setLoad] = React.useState(false);
   
+  const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login';
   let obj = {};
   let navigate = useNavigate();
-
+  
   function montarobj(){
-    obj = {
+      obj = {
       email: email,
       password: senha
     }
-    const response = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', obj);
+    console.log(obj);
+    setLoad(true);
+    const response = axios.post(URL, obj);
+    response.catch(err => {
+      if(err.response.status !== 200){
+        alert("Algo deu errado, por favor verifique os dados e tente novamente");
+        setLoad(false);
+      }
+    });
     response.then( result => {
-      console.log(result);
       if(result.status === 200){
         console.log(result.data.token);
         // tbm vai precisar do result.data.image//
-        navigate("/habitos");
+        navigate("/hoje");
       }
     });
   }  
@@ -34,14 +44,12 @@ export default function Login() {
           <h1>TrackIt</h1>
       </Iconeprincipal>
       <Entradas>
-          <input placeholder="  email" value={email} onChange={e => setEmail(e.target.value)}/>
-          <input placeholder="  senha" value={senha} onChange={e => setSenha(e.target.value)}/>
+          <input placeholder="  email" value={email} onChange={e => setEmail(e.target.value)} disabled = {load}/>
+          <input placeholder="  senha" value={senha} onChange={e => setSenha(e.target.value)} disabled = {load}/>
       </Entradas>
       <Cadastrar>
-      <Botão onClick={montarobj}>
-        <h2>
-          Entrar
-        </h2>
+      <Botão onClick={(load === false) && montarobj} disabled = {load}>
+        {(load) ? <Loader/> : <h2>Entrar</h2>}
       </Botão>
       <Link to= '/cadastro'>
         <h3>
