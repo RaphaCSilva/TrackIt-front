@@ -19,7 +19,7 @@ export default function BotaoDia(props) {
   
   return(
     <>
-      <button onClick = {clicando} className={(clicado === true) && "clicado"}> 
+      <button onClick = {clicando} className={(clicado === true) && "clicado"} disabled = {props.desliga}> 
         <h1> 
             {props.dia} 
         </h1> 

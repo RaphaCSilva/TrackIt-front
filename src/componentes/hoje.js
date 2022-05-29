@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import Footer from "./footer";
-import Toper from "./toper";
+import Header from "./header";
 import dayjs from "dayjs";
 
 export default function Hoje() {
@@ -13,7 +13,7 @@ export default function Hoje() {
 
     return(
       <>
-      <Toper/>
+      <Header/>
       <Container>
 
 

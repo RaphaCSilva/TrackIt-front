@@ -15,12 +15,12 @@ export default function Login() {
   let navigate = useNavigate();
   
   function montarobj(){
-      obj = {
+    setLoad(true);
+    obj = {
       email: email,
       password: senha
     }
     console.log(obj);
-    setLoad(true);
     const response = axios.post(URL, obj);
     response.catch(err => {
       if(err.response.status !== 200){

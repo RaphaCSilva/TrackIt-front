@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { Navigate, useNavigate, Link } from "react-router-dom";
 
-export default function Toper() {
+export default function Header() {
   let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQzNywiaWF0IjoxNjUzNzY0OTAyfQ.2ObdnB0Vj402NpERhqdIl5oc41gUvKtdyJWEfCOcOyk"
     
 

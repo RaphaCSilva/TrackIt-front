@@ -2,6 +2,8 @@ import React from "react";
 import axios from 'axios';
 import styled from 'styled-components';
 import { Navigate, useNavigate, Link } from "react-router-dom";
+import Loader from "./loader";
+
 
 export default function Cadastro() {
   
@@ -9,11 +11,13 @@ export default function Cadastro() {
   const [email, setEmail] = React.useState("");
   const [senha, setSenha] = React.useState("");
   const [foto, setFoto] = React.useState("");
+  const [load, setLoad] = React.useState(false);
   
   let obj = {};
   let navigate = useNavigate();
 
   function montarobj(){
+    setLoad(true);
     obj = {
       email: email,
       name: nome,
@@ -22,6 +26,12 @@ export default function Cadastro() {
     }
     console.log(obj);
     const response = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', obj);
+    response.catch(err => {
+      if(err.response.status !== 200){
+        alert("Algo deu errado, por favor verifique os dados e tente novamente");
+        setLoad(false);
+      }
+    });
     response.then( result => {
       console.log(result);
       if(result.status === 201){
@@ -36,16 +46,14 @@ export default function Cadastro() {
           <h1>TrackIt</h1>
       </Iconeprincipal>
       <Entradas>
-          <input placeholder="  email" value={email} onChange={e => setEmail(e.target.value)}/>
-          <input placeholder="  senha" value={senha} onChange={e => setSenha(e.target.value)}/>
-          <input placeholder="  nome" value={nome} onChange={e => setNome(e.target.value)}/>
-          <input placeholder="  foto" value={foto} onChange={e => setFoto(e.target.value)}/>
+          <input placeholder="  email" value={email} onChange={e => setEmail(e.target.value)} disabled = {load}/>
+          <input placeholder="  senha" value={senha} onChange={e => setSenha(e.target.value)} disabled = {load}/>
+          <input placeholder="  nome" value={nome} onChange={e => setNome(e.target.value)} disabled = {load}/>
+          <input placeholder="  foto" value={foto} onChange={e => setFoto(e.target.value)} disabled = {load}/>
       </Entradas>
       <Cadastrar>
-      <Botão onClick={montarobj}>
-        <h2>
-          Cadastrar
-        </h2>
+      <Botão onClick={montarobj} disabled = {load}>
+        {(load) ? <Loader/> : <h2>Cadastrar</h2>}
       </Botão>
       <Link to= '/'>
         <h3>

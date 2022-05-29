@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import Footer from "./footer";
-import Toper from "./toper";
+import Header from "./header";
 import Habito from "./habito";
 import Habitocriando from "./habitocriando";
 
@@ -11,7 +11,7 @@ export default function Habitos() {
     
 
     const [clicou, setClicou] = React.useState(false);
-    const [test, setTest] = React.useState([]);
+    const [hbtsfeitos, setHbtsfeitos] = React.useState([]);
 
 
     let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQzNywiaWF0IjoxNjUzODA1OTIyfQ.c-SP3QKVcwmhO1hwsD4VjQi4ZidF5k2xyx0r5aOO7tI";
@@ -23,7 +23,7 @@ export default function Habitos() {
     const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
     const response = axios.get(URL, config);
     response.then( result => {
-      setTest(result.data);
+      setHbtsfeitos(result.data);
     });
 
     function adicionarhabito(){
@@ -35,7 +35,7 @@ export default function Habitos() {
 
     return(
       <>
-      <Toper/>
+      <Header/>
       <Container>
         <Menusuperior>  
           <h1>
@@ -49,7 +49,7 @@ export default function Habitos() {
         </Menusuperior>
         <EspaçoHabitos>
           {(clicou === true) && <Habitocriando cancelou = {fechahabito}/>}
-          {(test !== undefined) && test.map((habit, index)=> <Habito key = {index} text = {habit.name} semana = {habit.days} index = {index}/>)}
+          {(hbtsfeitos !== undefined)? hbtsfeitos.map((habit, index)=> <Habito key = {index} text = {habit.name} semana = {habit.days} index = {index}/>) : <></>}
         </EspaçoHabitos>
       </Container>
       <Footer/>
