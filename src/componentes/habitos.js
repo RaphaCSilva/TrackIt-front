@@ -9,19 +9,15 @@ import Habitocriando from "./habitocriando";
 
 export default function Habitos() {
     
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQzNywiaWF0IjoxNjUzNzMyNTI5fQ.nsn0VJ5Cr1tQgBInn0aeTDJEDfgpb6h8OwTR-Nwmt_4"
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQzNywiaWF0IjoxNjUzNzY0OTAyfQ.2ObdnB0Vj402NpERhqdIl5oc41gUvKtdyJWEfCOcOyk"
     
     const [clicou, setClicou] = React.useState(false);
 
     function adicionarhabito(){
-      if(clicou){
-          setClicou(false);
-          console.log(clicou);
-
-      }else{
-          setClicou(true);
-          console.log(clicou);
-      }
+      setClicou(true);
+    }
+    function fechahabito(){
+      setClicou(false);
     }
 
     return(
@@ -39,10 +35,8 @@ export default function Habitos() {
           </Adicionar>
         </Menusuperior>
         <EspaçoHabitos>
-          {(clicou === true) && <Habitocriando/>}
-          <Habito>
-
-          </Habito>
+          {(clicou === true) && <Habitocriando cancelou = {fechahabito}/>}
+          <Habito/>
         </EspaçoHabitos>
       </Container>
       <Footer/>
@@ -55,6 +49,7 @@ const Container = styled.div`
   height: 1000px;
   background: #E5E5E5;
 `;
+
 const Menusuperior = styled.div`
   display: flex;
   
@@ -69,6 +64,7 @@ const Menusuperior = styled.div`
     padding-left: 17px
   }
 `;
+
 const Adicionar = styled.div`
   width: 40px;
   height: 35px;

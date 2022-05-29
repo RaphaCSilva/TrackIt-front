@@ -6,7 +6,7 @@ import Footer from "./footer";
 import Toper from "./toper";
 
 export default function Hoje() {
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQzNywiaWF0IjoxNjUzNzMyNTI5fQ.nsn0VJ5Cr1tQgBInn0aeTDJEDfgpb6h8OwTR-Nwmt_4"
+  let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQzNywiaWF0IjoxNjUzNzY0OTAyfQ.2ObdnB0Vj402NpERhqdIl5oc41gUvKtdyJWEfCOcOyk"
     
 
     return(
