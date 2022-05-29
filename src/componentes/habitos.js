@@ -10,7 +10,13 @@ import Habitocriando from "./habitocriando";
 export default function Habitos() {
     
     let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQzNywiaWF0IjoxNjUzNzY0OTAyfQ.2ObdnB0Vj402NpERhqdIl5oc41gUvKtdyJWEfCOcOyk"
-    
+    let test = [
+      {
+        id: 1,
+        name: "Nome do hábito",
+        days: [6, 4, 1]
+      }
+    ];
     const [clicou, setClicou] = React.useState(false);
 
     function adicionarhabito(){
@@ -36,7 +42,7 @@ export default function Habitos() {
         </Menusuperior>
         <EspaçoHabitos>
           {(clicou === true) && <Habitocriando cancelou = {fechahabito}/>}
-          <Habito/>
+          {test.map((habit, index)=> <Habito key = {index} text = {habit.name} semana = {habit.days} index = {index}/>)}
         </EspaçoHabitos>
       </Container>
       <Footer/>

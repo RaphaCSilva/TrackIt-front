@@ -2,15 +2,19 @@ import React from "react";
 import axios from 'axios';
 import styled from 'styled-components';
 import { Navigate, useNavigate, Link } from "react-router-dom";
+import Caixinhadia from "./caixinhadia";
 
-export default function Habito() {
+export default function Habito(props) {
 
+    const semana = ["D", "S", "T", "Q", "Q", "S", "S"]
     return(
       <>
       <Caixabranca>
-            <input/>
+            <h2>
+              {props.text}
+            </h2>
             <Dias>
-               
+              {semana.map((day, index)=> <Caixinhadia key = {index} dia = {day} index = {index} semana={props.semana}/>)}
             </Dias>
         </Caixabranca>
       </>
@@ -18,14 +22,23 @@ export default function Habito() {
 }
 const Caixabranca = styled.div`
   min-width: 340px;
-  height: 180px;
+  height: 91px;
   background: #FFFFFF;
   border-radius: 5px;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-right: 18px;
   margin-left: 18px;
   
-
+  h2 {
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19.976px;
+    line-height: 25px;
+    color: #666666;
+    padding-top: 13px;
+    padding-left: 15px;
+  }
   input {
     width: 303px;
     height: 45px;
