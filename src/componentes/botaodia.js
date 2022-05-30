@@ -1,7 +1,4 @@
 import React from "react";
-import axios from 'axios';
-import styled from 'styled-components';
-import { Navigate, useNavigate, Link } from "react-router-dom";
 
 export default function BotaoDia(props) {
     
@@ -19,7 +16,7 @@ export default function BotaoDia(props) {
   
   return(
     <>
-      <button onClick = {clicando} className={(clicado === true) && "clicado"} disabled = {props.desliga}> 
+      <button onClick = {clicando} className={(clicado === true)? "clicado" : ""} disabled = {props.desliga}> 
         <h1> 
             {props.dia} 
         </h1> 

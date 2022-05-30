@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React, {Component, useState} from "react";
+import React from "react";
 import Login from "./componentes/login"
 import Cadastro from "./componentes/cadastro"
 import Habitos from "./componentes/habitos";

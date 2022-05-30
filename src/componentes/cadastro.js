@@ -1,7 +1,7 @@
 import React from "react";
 import axios from 'axios';
 import styled from 'styled-components';
-import { Navigate, useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Loader from "./loader";
 
 
@@ -24,7 +24,6 @@ export default function Cadastro() {
       image: foto,
       password: senha
     }
-    console.log(obj);
     const response = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', obj);
     response.catch(err => {
       if(err.response.status !== 200){
@@ -41,10 +40,10 @@ export default function Cadastro() {
   }
     return (
       <>
-      <Iconeprincipal>
-          <img src=""/>
+      <IconePrincipal>
+          <img src="" alt = ""/>
           <h1>TrackIt</h1>
-      </Iconeprincipal>
+      </IconePrincipal>
       <Entradas>
           <input placeholder="  email" value={email} onChange={e => setEmail(e.target.value)} disabled = {load}/>
           <input placeholder="  senha" value={senha} onChange={e => setSenha(e.target.value)} disabled = {load}/>
@@ -65,7 +64,7 @@ export default function Cadastro() {
     );
   }
 
-  const Iconeprincipal = styled.div`
+  const IconePrincipal = styled.div`
     width: 180px;
     height: 180px;
     margin: auto;

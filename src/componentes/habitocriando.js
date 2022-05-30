@@ -1,14 +1,13 @@
 import React from "react";
 import axios from 'axios';
 import styled from 'styled-components';
-import { Navigate, useNavigate, Link } from "react-router-dom";
 import BotaoDia from "./botaodia";
 import Loader from "./loader";
 
 export default function Habitocriando(props) {
   
   let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQzNywiaWF0IjoxNjUzODA1OTIyfQ.c-SP3QKVcwmhO1hwsD4VjQi4ZidF5k2xyx0r5aOO7tI";
-  const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/abits";
+  const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
   const config = {
     headers: {
       "Authorization": `Bearer ${token}`
@@ -63,8 +62,8 @@ export default function Habitocriando(props) {
                 <h2 onClick={jogapraCima}>
                     cancelar
                 </h2>
-                <button onClick={montarobj} disabled = {load}>
-                  {(load) ? <Loader/> : <h3>Salvar</h3>}
+                <button onClick={montarobj} disabled = {load}> 
+                  {(load)? <Loader/> : <h3>Salvar</h3>}
                 </button>
             </Cancelasalva>
         </Caixabranca>

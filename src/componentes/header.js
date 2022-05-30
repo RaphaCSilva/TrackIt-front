@@ -1,11 +1,7 @@
 import React from "react";
-import axios from 'axios';
 import styled from 'styled-components';
-import { Navigate, useNavigate, Link } from "react-router-dom";
 
 export default function Header() {
-  let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQzNywiaWF0IjoxNjUzNzY0OTAyfQ.2ObdnB0Vj402NpERhqdIl5oc41gUvKtdyJWEfCOcOyk"
-    
 
     return(
       <>
@@ -13,8 +9,7 @@ export default function Header() {
           <h1>
               TrackIt
           </h1>
-          <img src="https://veterinario.pt/wp-content/uploads/2015/09/cat-pet-animal-domestic-gato800.jpg" alt="">
-          </img>
+          <img src="https://veterinario.pt/wp-content/uploads/2015/09/cat-pet-animal-domestic-gato800.jpg" alt=""/>
       </Barrasuperior>
       </>
     );
@@ -44,12 +39,11 @@ const Barrasuperior = styled.div `
     color: #FFFFFF;
   }
   img{
+    position: absolute;
     width: 51px;
     height: 51px;
-    margin-right: 18px;
-    margin-top: 9px;
-    
-    background: url(image.png);
+    right: 18px;
+    top: 9px;
     border-radius: 98.5px;
   }
 `;

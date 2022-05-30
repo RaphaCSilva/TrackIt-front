@@ -1,11 +1,11 @@
 import React from "react";
 import axios from 'axios';
 import styled from 'styled-components';
-import { Navigate, useNavigate, Link } from "react-router-dom";
 import Footer from "./footer";
 import Header from "./header";
 import Habito from "./habito";
 import Habitocriando from "./habitocriando";
+import Texthbt from "./textsemhabito";
 
 export default function Habitos() {
     
@@ -14,7 +14,7 @@ export default function Habitos() {
     const [hbtsfeitos, setHbtsfeitos] = React.useState([]);
 
 
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQzNywiaWF0IjoxNjUzODA1OTIyfQ.c-SP3QKVcwmhO1hwsD4VjQi4ZidF5k2xyx0r5aOO7tI";
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQzNywiaWF0IjoxNjUzODY2MzA3fQ.U8oqsctH5ueoOr0rYhljr5ja-n5h8oRkPM3oHgToRA0";
     const config = {
       headers: {
         "Authorization": `Bearer ${token}`
@@ -29,6 +29,7 @@ export default function Habitos() {
     function adicionarhabito(){
       setClicou(true);
     }
+
     function fechahabito(){
       setClicou(false);
     }
@@ -49,7 +50,7 @@ export default function Habitos() {
         </Menusuperior>
         <EspaçoHabitos>
           {(clicou === true) && <Habitocriando cancelou = {fechahabito}/>}
-          {(hbtsfeitos !== undefined)? hbtsfeitos.map((habit, index)=> <Habito key = {index} text = {habit.name} semana = {habit.days} index = {index}/>) : <></>}
+          {(hbtsfeitos.length !== 0)? hbtsfeitos.map((habit, index)=> <Habito key = {index} text = {habit.name} semana = {habit.days} index = {index}/>): <Texthbt/>}
         </EspaçoHabitos>
       </Container>
       <Footer/>
@@ -100,5 +101,16 @@ const Adicionar = styled.div`
   }
 `;
 const EspaçoHabitos = styled.div`
-
+  h3 {
+    width: 338px;
+    height: 74px;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.976px;
+    line-height: 22px;
+    color: #666666;
+    margin-top: 29px;
+    margin-left: 19px;
+  }
 `;
