@@ -7,7 +7,7 @@ import UserContext from "./context";
 
 export default function Habitocriando(props) {
   
-  const {user} = useContext(UserContext);
+  const {user, arr, setArr, texthbt, setTexthbt} = useContext(UserContext);
   const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
   const config = {
     headers: {
@@ -15,8 +15,6 @@ export default function Habitocriando(props) {
     }
   }
 
-  const [texthbt, setTexthbt] = React.useState("");
-  const [arr, setArr] = React.useState([]);
   const [load, setLoad] = React.useState(false);
   const semana = ["D", "S", "T", "Q", "Q", "S", "S"]
   
@@ -56,7 +54,7 @@ export default function Habitocriando(props) {
         <Caixabranca>
             <input placeholder="  nome do hábito" value={texthbt} onChange={e => setTexthbt(e.target.value)} disabled = {load} />
             <Dias>
-                {semana.map((day, index)=> <BotaoDia key = {index} dia = {day} index = {index} recebenum = {montaArr} tiranum = {filtraArr} desliga = {load}/>)}
+                {semana.map((day, index)=> <BotaoDia key = {index} dia = {day} index = {index} recebenum = {montaArr} tiranum = {filtraArr} desliga = {load} semana = {arr}/>)}
             </Dias>
             <Cancelasalva>
                 <h2 onClick={jogapraCima}>

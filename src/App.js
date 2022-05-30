@@ -9,10 +9,12 @@ import UserContext from "./componentes/context";
 
 export default function App() {
   const [user, setUser] = useState({});
+  const [arr, setArr] = React.useState([]);
+  const [texthbt, setTexthbt] = React.useState("");
   const [progress, setProgress] = useState(0);
 
   return (
-    <UserContext.Provider value = {{user, setUser, progress, setProgress}}>
+    <UserContext.Provider value = {{user, setUser, progress, setProgress, arr, setArr, texthbt, setTexthbt}}>
       <BrowserRouter>
         <Routes>
           <Route path="" element={<Login/>}/>
