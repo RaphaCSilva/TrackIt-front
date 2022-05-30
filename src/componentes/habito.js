@@ -15,12 +15,14 @@ export default function Habito(props) {
     }
      
     function deletehabit(){
+      const confirm = window.confirm("Você tem certeza que quer excluir este hábito ?");
+      if(confirm){
       const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/"+props.id;
       axios.delete(URL, config)
             .then( result => {
-            console.log(result);
-            props.atualiza();
+              props.atualiza();
           });
+      }
     }
 
     return(

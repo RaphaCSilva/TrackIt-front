@@ -32,7 +32,6 @@ export default function Cadastro() {
       }
     });
     response.then( result => {
-      console.log(result);
       if(result.status === 201){
         navigate("/");
       }

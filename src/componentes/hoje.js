@@ -8,12 +8,19 @@ import UserContext from "./context";
 import axios from 'axios';
 import Habitocheck from "./habitocheck";
 
+
+function calculaProgresso(hbtshoje, setProgress){
+  let total = hbtshoje.length;
+  let filtrado = hbtshoje.filter((habit) => habit.done === true);
+  let porcentagem = ((filtrado.length/total)*100);
+  setProgress(porcentagem);
+}
+
 export default function Hoje() {
 
   const hoje = dayjs().locale('pt-br').format('dddd, DD/MM'); 
   const hojearrumado =  hoje[0].toUpperCase() + hoje.substring([1]);
-  const {user, cont, progress, setProgress} = useContext(UserContext);
-  const [tamanho, setTamanho] = React.useState(0);
+  const {user, progress, setProgress} = useContext(UserContext);
   const [hbtshoje, setHbtshoje] = React.useState([]);
 
   const config = {
@@ -21,22 +28,22 @@ export default function Hoje() {
       "Authorization": `Bearer ${user.token}`
     }
   }
+  console.log(progress);
+  calculaProgresso(hbtshoje, setProgress);
+
   function atualizahabitos(){
     const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
-    console.log("passei duas vezes");
     axios.get(URL, config)
         .then( result => {
       setHbtshoje(result.data);
-      setTamanho(result.data.length);
-      setProgress(Math.round((cont/tamanho)*100));
+      calculaProgresso(hbtshoje, setProgress);
   });
   }
-
+  
   useEffect(() => {
     atualizahabitos();
   }, []);
-
- 
+  
     return(
       <>
       <Header/>
@@ -45,8 +52,8 @@ export default function Hoje() {
           <h1>
             {hojearrumado}
           </h1>
-          <p>
-            Nenhum hábito concluído ainda
+          <p className={(progress > 0)? "recorde":""}>
+            {(progress === 0)? "Nenhum hábito concluído ainda" : progress.toFixed(0) + "% dos hábitos concluídos"}
           </p>
         </Menusuperior>
         <EspaçoHabitos>

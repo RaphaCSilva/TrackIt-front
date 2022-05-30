@@ -29,7 +29,7 @@ export default function Footer() {
               })}        
             >
               <Text>
-                {progress} - {cont}
+                Hoje
               </Text>  
             </CircularProgressbarWithChildren>
           </Link>

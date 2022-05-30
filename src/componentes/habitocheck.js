@@ -8,7 +8,7 @@ export default function Habitocheck(props) {
     
     const [feito, setFeito] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
-    const {user, progress, setProgress, cont, setCont} = useContext(UserContext);
+    const {user} = useContext(UserContext);
 
     const config = {
         headers: {
@@ -19,7 +19,6 @@ export default function Habitocheck(props) {
     useEffect(() => {
         if(props.feito){
             setFeito(true);
-            setCont(cont + 1);
         }
       }, []);
     
@@ -32,7 +31,6 @@ export default function Habitocheck(props) {
             setFeito(false);
             props.atualiza();
             setLoading(false);
-            setCont(cont - 1);
           });
         }else{
           const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/"+ props.id +"/check";
@@ -41,7 +39,6 @@ export default function Habitocheck(props) {
             setFeito(true);
             props.atualiza();
             setLoading(false);
-            setCont(cont + 1);
           });
         }
     }

@@ -30,17 +30,14 @@ export default function Habitocriando(props) {
       name: texthbt,
       days: arr
     }
-    console.log(obj);
     const response = axios.post(URL, obj, config);
     response.catch(err => {
-      console.log(err.response);
       if(err.response.status !== 200){
         alert("Algo deu errado, por favor verifique os dados e tente novamente");
         setLoad(false);
       }
     });
     response.then( result => {
-      console.log(result.response);
       props.atualiza();
       setTexthbt("");
       jogapraCima();

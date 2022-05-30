@@ -23,7 +23,6 @@ export default function Login() {
       email: email,
       password: senha
     }
-    console.log(obj);
     const response = axios.post(URL, obj);
     response.catch(err => {
       if(err.response.status !== 200){
@@ -51,7 +50,7 @@ export default function Login() {
       </Iconeprincipal>
       <Entradas>
           <input placeholder="  email" value={email} onChange={e => setEmail(e.target.value)} disabled = {load}/>
-          <input placeholder="  senha" value={senha} onChange={e => setSenha(e.target.value)} disabled = {load}/>
+          <input type="password" placeholder="  senha" value={senha} onChange={e => setSenha(e.target.value)} disabled = {load}/>
       </Entradas>
       <Cadastrar>
       <Botão onClick={montarobj} disabled = {load}>

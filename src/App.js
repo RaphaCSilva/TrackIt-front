@@ -9,11 +9,10 @@ import UserContext from "./componentes/context";
 
 export default function App() {
   const [user, setUser] = useState({});
-  var [progress, setProgress] = useState(0);
-  var [cont, setCont] = useState(0);
+  const [progress, setProgress] = useState(0);
 
   return (
-    <UserContext.Provider value = {{user, setUser, progress, setProgress, cont, setCont}}>
+    <UserContext.Provider value = {{user, setUser, progress, setProgress}}>
       <BrowserRouter>
         <Routes>
           <Route path="" element={<Login/>}/>
