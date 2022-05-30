@@ -41,6 +41,7 @@ export default function Habitocriando(props) {
     });
     response.then( result => {
       console.log(result.response);
+      props.atualiza();
       setTexthbt("");
       jogapraCima();
     });

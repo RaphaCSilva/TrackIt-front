@@ -2,11 +2,13 @@ import React, { useContext, useEffect } from "react";
 import axios from "axios";
 import styled from 'styled-components';
 import UserContext from "./context";
+import Loader from "./loader";
 
 export default function Habitocheck(props) {
     
     const [feito, setFeito] = React.useState(false);
-    const {user} = useContext(UserContext);
+    const [loading, setLoading] = React.useState(false);
+    const {user, progress, setProgress, cont, setCont} = useContext(UserContext);
 
     const config = {
         headers: {
@@ -14,25 +16,32 @@ export default function Habitocheck(props) {
         }
     }
     
-    
     useEffect(() => {
         if(props.feito){
             setFeito(true);
+            setCont(cont + 1);
         }
       }, []);
     
     function checkar(){
+        setLoading(true);
         if(feito){
           const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/"+props.id+"/uncheck";
           const response = axios.post(URL,{}, config);
           response.then( result => {
             setFeito(false);
+            props.atualiza();
+            setLoading(false);
+            setCont(cont - 1);
           });
         }else{
           const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/"+ props.id +"/check";
           const response = axios.post(URL,{}, config);
           response.then( result => {
             setFeito(true);
+            props.atualiza();
+            setLoading(false);
+            setCont(cont + 1);
           });
         }
     }
@@ -47,12 +56,12 @@ export default function Habitocheck(props) {
             <span>Sequência atual:</span><span className={(feito)? "recorde" : ""}> {props.sequencia} {(props.sequencia === 1) ? "dia" : "dias"}</span>
           </p>
           <p>
-            <span>Sequência recorde:</span><span className={(feito && props.sequencia === props.recorde)? "recorde" : ""}> {(props.recorde === 1) ? "dia" : "dias"}</span>
+            <span>Sequência recorde:</span><span className={(feito && props.sequencia === props.recorde)? "recorde" : ""}> {props.recorde} {(props.recorde === 1) ? "dia" : "dias"}</span>
           </p>
         </Textos>  
         <Check>
-          <button onClick={checkar} className={(feito)? "clicado" : ""}>
-            <ion-icon name="checkmark-outline"></ion-icon>
+          <button onClick={checkar} className={(feito)? "clicado" : ""} disabled = {loading}>
+            {(loading)? <Loader/> : <ion-icon name="checkmark-outline"></ion-icon>}
           </button>
         </Check>
       </Caixabranca>
@@ -119,5 +128,6 @@ const Check = styled.div`
   ion-icon {
     font-size: 48px;
     color: #FFFFFF;
+    z-index: 0;
   }
 `;

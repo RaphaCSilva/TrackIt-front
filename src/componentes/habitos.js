@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import axios from 'axios';
 import styled from 'styled-components';
 import Footer from "./footer";
@@ -22,10 +22,16 @@ export default function Habitos() {
       }
     }
     const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
-    const response = axios.get(URL, config);
-    response.then( result => {
+    
+    function atualizahabits(){
+      axios.get(URL, config)
+          .then( result => {
       setHbtsfeitos(result.data);
     });
+    }
+    useEffect(() => {
+      atualizahabits();
+    }, []);
 
     function adicionarhabito(){
       setClicou(true);
@@ -50,8 +56,8 @@ export default function Habitos() {
           </Adicionar>
         </Menusuperior>
         <EspaçoHabitos>
-          {(clicou) && <Habitocriando cancelou = {fechahabito}/>}
-          {(hbtsfeitos.length !== 0)? hbtsfeitos.map((habit, index)=> <Habito key = {index} text = {habit.name} semana = {habit.days} index = {index}/>): <Texthbt/>}
+          {(clicou) && <Habitocriando cancelou = {fechahabito} atualiza = {atualizahabits}/>}
+          {(hbtsfeitos.length !== 0)? hbtsfeitos.map((habit, index)=> <Habito key = {index} text = {habit.name} semana = {habit.days} id = {habit.id} atualiza = {atualizahabits} index = {index}/>): <Texthbt/>}
         </EspaçoHabitos>
       </Container>
       <Footer/>
@@ -61,6 +67,7 @@ export default function Habitos() {
 
 const Container = styled.div`
   width: 100%;
+  min-height: 800px;
   height: 100%;
   background: #E5E5E5;
 `;

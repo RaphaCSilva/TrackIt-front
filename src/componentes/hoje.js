@@ -1,16 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from 'styled-components';
 import Footer from "./footer";
 import Header from "./header";
 import dayjs from "dayjs";
+import 'dayjs/locale/pt-br';
 import UserContext from "./context";
 import axios from 'axios';
 import Habitocheck from "./habitocheck";
 
 export default function Hoje() {
 
-  let hoje = dayjs({});
-  const {user, progress, setProgress} = useContext(UserContext);
+  const hoje = dayjs().locale('pt-br').format('dddd, DD/MM'); 
+  const hojearrumado =  hoje[0].toUpperCase() + hoje.substring([1]);
+  const {user, cont, progress, setProgress} = useContext(UserContext);
+  const [tamanho, setTamanho] = React.useState(0);
   const [hbtshoje, setHbtshoje] = React.useState([]);
 
   const config = {
@@ -18,25 +21,37 @@ export default function Hoje() {
       "Authorization": `Bearer ${user.token}`
     }
   }
-  const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
-  const response = axios.get(URL, config);
-  response.then( result => {
-    setHbtshoje(result.data);
+  function atualizahabitos(){
+    const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
+    console.log("passei duas vezes");
+    axios.get(URL, config)
+        .then( result => {
+      setHbtshoje(result.data);
+      setTamanho(result.data.length);
+      setProgress(Math.round((cont/tamanho)*100));
   });
+  }
+
+  useEffect(() => {
+    atualizahabitos();
+  }, []);
+
+ 
     return(
       <>
       <Header/>
       <Container>
         <Menusuperior>  
           <h1>
-            Segunda, 17/05
+            {hojearrumado}
           </h1>
           <p>
             Nenhum hábito concluído ainda
           </p>
         </Menusuperior>
         <EspaçoHabitos>
-          {(hbtshoje.length !== 0)&& hbtshoje.map((habit, index)=> <Habitocheck key = {index} nome={habit.name} id = {habit.id} feito = {habit.done} sequencia = {habit.currentSequence} recorde = {habit.highestSequence}/>)}
+          {(hbtshoje.length !== 0)&& hbtshoje.map((habit, index)=> <Habitocheck key = {index} nome={habit.name} id = {habit.id}
+          feito = {habit.done} sequencia = {habit.currentSequence} recorde = {habit.highestSequence} atualiza = {atualizahabitos}/>)}
         </EspaçoHabitos>
       </Container>
       <Footer/>

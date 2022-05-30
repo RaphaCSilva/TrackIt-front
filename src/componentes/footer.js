@@ -7,7 +7,7 @@ import UserContext from "./context";
 
 export default function Footer() {
 
-  const {progress} = useContext(UserContext);
+  const {progress, cont} = useContext(UserContext);
 
     return(
       <>
@@ -29,7 +29,7 @@ export default function Footer() {
               })}        
             >
               <Text>
-                Hoje
+                {progress} - {cont}
               </Text>  
             </CircularProgressbarWithChildren>
           </Link>

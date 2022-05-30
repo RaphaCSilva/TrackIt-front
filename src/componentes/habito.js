@@ -1,15 +1,34 @@
-import React from "react";
+import React, {useContext} from "react";
+import axios from "axios";
 import styled from 'styled-components';
 import Caixinhadia from "./caixinhadia";
+import UserContext from "./context";
 
 export default function Habito(props) {
-
+ 
+    const {user} = useContext(UserContext);
     const semana = ["D", "S", "T", "Q", "Q", "S", "S"]
+    const config = {
+      headers: {
+        "Authorization": `Bearer ${user.token}`
+      }
+    }
+     
+    function deletehabit(){
+      const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/"+props.id;
+      axios.delete(URL, config)
+            .then( result => {
+            console.log(result);
+            props.atualiza();
+          });
+    }
+
     return(
       <Caixabranca>
             <h2>
               {props.text}
             </h2>
+            <ion-icon name="trash-outline" onClick={deletehabit}></ion-icon>
             <Dias>
               {semana.map((day, index)=> <Caixinhadia key = {index} dia = {day} index = {index} semana={props.semana}/>)}
             </Dias>
@@ -17,6 +36,7 @@ export default function Habito(props) {
     );
 }
 const Caixabranca = styled.div`
+  position: relative;
   min-width: 340px;
   height: 91px;
   background: #FFFFFF;
@@ -25,6 +45,12 @@ const Caixabranca = styled.div`
   margin-right: 18px;
   margin-left: 18px;
   
+  ion-icon {
+    position: absolute;
+    top: 11px;
+    right: 10px;
+  }
+
   h2 {
     font-family: 'Lexend Deca';
     font-style: normal;
