@@ -6,7 +6,6 @@ export default function Habito(props) {
 
     const semana = ["D", "S", "T", "Q", "Q", "S", "S"]
     return(
-      <>
       <Caixabranca>
             <h2>
               {props.text}
@@ -15,7 +14,6 @@ export default function Habito(props) {
               {semana.map((day, index)=> <Caixinhadia key = {index} dia = {day} index = {index} semana={props.semana}/>)}
             </Dias>
         </Caixabranca>
-      </>
     );
 }
 const Caixabranca = styled.div`
