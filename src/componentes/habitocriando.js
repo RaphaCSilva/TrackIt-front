@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import axios from 'axios';
 import styled from 'styled-components';
 import BotaoDia from "./botaodia";
 import Loader from "./loader";
+import UserContext from "./context";
 
 export default function Habitocriando(props) {
   
-  let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQzNywiaWF0IjoxNjUzODA1OTIyfQ.c-SP3QKVcwmhO1hwsD4VjQi4ZidF5k2xyx0r5aOO7tI";
+  const {user} = useContext(UserContext);
   const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
   const config = {
     headers: {
-      "Authorization": `Bearer ${token}`
+      "Authorization": `Bearer ${user.token}`
     }
   }
 
@@ -29,6 +30,7 @@ export default function Habitocriando(props) {
       name: texthbt,
       days: arr
     }
+    console.log(obj);
     const response = axios.post(URL, obj, config);
     response.catch(err => {
       console.log(err.response);
@@ -63,7 +65,7 @@ export default function Habitocriando(props) {
                     cancelar
                 </h2>
                 <button onClick={montarobj} disabled = {load}> 
-                  {(load)? <Loader/> : <h3>Salvar</h3>}
+                  {(load)? <Loader/> : <p>Salvar</p>}
                 </button>
             </Cancelasalva>
         </Caixabranca>
@@ -140,11 +142,22 @@ const Cancelasalva = styled.div`
   }
   
   button {
+    display:flex;
+    justify-content: center;
+    align-items: center;
     width: 84px;
     height: 35px;
     background: #52B6FF;
     border-radius: 4.63636px;
     margin-right: 16px;
     margin-bottom: 15px;
+    p {
+      font-family: 'Lexend Deca';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 15.976px;
+      line-height: 20px;
+      color: #FFFFFF;
+    }
   }
 `;

@@ -1,22 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import axios from 'axios';
 import styled from 'styled-components';
 import { useNavigate, Link } from "react-router-dom";
 import Loader from "./loader";
+import UserContext from "./context";
+
 
 export default function Login() {
   
   const [email, setEmail] = React.useState("");
   const [senha, setSenha] = React.useState("");
   const [load, setLoad] = React.useState(false);
+
+  const {user, setUser} = useContext(UserContext);
   
   const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login';
-  let obj = {};
   let navigate = useNavigate();
   
   function montarobj(){
     setLoad(true);
-    obj = {
+    const obj = {
       email: email,
       password: senha
     }
@@ -30,7 +33,10 @@ export default function Login() {
     });
     response.then( result => {
       if(result.status === 200){
-        console.log(result.data.token);
+        setUser({
+          token: result.data.token,
+          img: result.data.image
+        });
         // tbm vai precisar do result.data.image//
         navigate("/hoje");
       }
@@ -48,7 +54,7 @@ export default function Login() {
           <input placeholder="  senha" value={senha} onChange={e => setSenha(e.target.value)} disabled = {load}/>
       </Entradas>
       <Cadastrar>
-      <Botão onClick={(load === false) && montarobj} disabled = {load}>
+      <Botão onClick={montarobj} disabled = {load}>
         {(load) ? <Loader/> : <h2>Entrar</h2>}
       </Botão>
       <Link to= '/cadastro'>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import axios from 'axios';
 import styled from 'styled-components';
 import Footer from "./footer";
@@ -6,18 +6,19 @@ import Header from "./header";
 import Habito from "./habito";
 import Habitocriando from "./habitocriando";
 import Texthbt from "./textsemhabito";
+import UserContext from "./context";
 
 export default function Habitos() {
     
 
     const [clicou, setClicou] = React.useState(false);
     const [hbtsfeitos, setHbtsfeitos] = React.useState([]);
+    
+    const {user} = useContext(UserContext);
 
-
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQzNywiaWF0IjoxNjUzODY2MzA3fQ.U8oqsctH5ueoOr0rYhljr5ja-n5h8oRkPM3oHgToRA0";
     const config = {
       headers: {
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ${user.token}`
       }
     }
     const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
@@ -43,13 +44,13 @@ export default function Habitos() {
             Meus hábitos
           </h1>
           <Adicionar onClick={adicionarhabito}>
-            <h2>
+            <p>
               +
-            </h2>
+            </p>
           </Adicionar>
         </Menusuperior>
         <EspaçoHabitos>
-          {(clicou === true) && <Habitocriando cancelou = {fechahabito}/>}
+          {(clicou) && <Habitocriando cancelou = {fechahabito}/>}
           {(hbtsfeitos.length !== 0)? hbtsfeitos.map((habit, index)=> <Habito key = {index} text = {habit.name} semana = {habit.days} index = {index}/>): <Texthbt/>}
         </EspaçoHabitos>
       </Container>
@@ -60,7 +61,7 @@ export default function Habitos() {
 
 const Container = styled.div`
   width: 100%;
-  height: 1000px;
+  height: 100%;
   background: #E5E5E5;
 `;
 
@@ -91,16 +92,18 @@ const Adicionar = styled.div`
   justify-content: center;
   align-items: center;
 
-  h2 {
+  p {
       font-family: 'Lexend Deca';
       font-style: normal;
       font-weight: 400;
       font-size: 26.976px;
       line-height: 34px;
       color: #FFFFFF;
+      margin-bottom: 4px;
   }
 `;
 const EspaçoHabitos = styled.div`
+  padding-bottom: 120px;
   h3 {
     width: 338px;
     height: 74px;

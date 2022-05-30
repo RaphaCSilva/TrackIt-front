@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from 'styled-components';
+import UserContext from "./context";
 
 export default function Header() {
+
+  const {user} = useContext(UserContext); 
 
     return(
       <>
@@ -9,7 +12,7 @@ export default function Header() {
           <h1>
               TrackIt
           </h1>
-          <img src="https://veterinario.pt/wp-content/uploads/2015/09/cat-pet-animal-domestic-gato800.jpg" alt=""/>
+          <img src={user.img} alt=""/>
       </Barrasuperior>
       </>
     );

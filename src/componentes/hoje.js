@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from 'styled-components';
 import Footer from "./footer";
 import Header from "./header";
 import dayjs from "dayjs";
+import UserContext from "./context";
+import axios from 'axios';
 
 export default function Hoje() {
 
   let hoje = dayjs({});
-  console.log(hoje);
+  const {user, progress, setProgress} = useContext(UserContext);
+  const [hbtshoje, setHbtshoje] = React.useState([]);
+
+  const config = {
+    headers: {
+      "Authorization": `Bearer ${user.token}`
+    }
+  }
+  const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
+  const response = axios.get(URL, config);
+  response.then( result => {
+    setHbtshoje(result.data);
+  });
 
     return(
       <>
