@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import styled from 'styled-components';
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { buildStyles, CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css"
 import UserContext from "./context";
 
 export default function Footer() {
 
-  const {progress, cont} = useContext(UserContext);
+  const {progress} = useContext(UserContext);
 
     return(
       <>

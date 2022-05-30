@@ -38,6 +38,7 @@ export default function Habitocriando(props) {
     response.then( result => {
       props.atualiza();
       setTexthbt("");
+      setArr([]);
       jogapraCima();
     });
   }

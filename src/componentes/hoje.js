@@ -28,7 +28,6 @@ export default function Hoje() {
       "Authorization": `Bearer ${user.token}`
     }
   }
-  console.log(progress);
   calculaProgresso(hbtshoje, setProgress);
 
   function atualizahabitos(){
@@ -56,10 +55,10 @@ export default function Hoje() {
             {(progress === 0)? "Nenhum hábito concluído ainda" : progress.toFixed(0) + "% dos hábitos concluídos"}
           </p>
         </Menusuperior>
-        <EspaçoHabitos>
+        <EspacoHabitos>
           {(hbtshoje.length !== 0)&& hbtshoje.map((habit, index)=> <Habitocheck key = {index} nome={habit.name} id = {habit.id}
           feito = {habit.done} sequencia = {habit.currentSequence} recorde = {habit.highestSequence} atualiza = {atualizahabitos}/>)}
-        </EspaçoHabitos>
+        </EspacoHabitos>
       </Container>
       <Footer/>
       </>
@@ -68,11 +67,12 @@ export default function Hoje() {
 
 const Container = styled.div`
   width: 100%;
-  height: 1000px;
+  height: 100%;
+  min-height: 1000px;
   background: #E5E5E5;
 `;
 
-const EspaçoHabitos = styled.div`
+const EspacoHabitos = styled.div`
   padding-bottom: 120px;
   padding-top: 28px;
   h3 {

@@ -40,7 +40,7 @@ export default function Cadastro() {
     return (
       <>
       <IconePrincipal>
-          <img src="" alt = ""/>
+          <img src="assets/img/logo.png" alt =""/>
           <h1>TrackIt</h1>
       </IconePrincipal>
       <Entradas>
@@ -50,9 +50,9 @@ export default function Cadastro() {
           <input placeholder="  foto" value={foto} onChange={e => setFoto(e.target.value)} disabled = {load}/>
       </Entradas>
       <Cadastrar>
-      <Botão onClick={montarobj} disabled = {load}>
+      <Botao onClick={montarobj} disabled = {load}>
         {(load) ? <Loader/> : <h2>Cadastrar</h2>}
-      </Botão>
+      </Botao>
       <Link to= '/'>
         <h3>
         Já tem uma conta? Faça Login!
@@ -68,7 +68,11 @@ export default function Cadastro() {
     height: 180px;
     margin: auto;
     margin-top: 68px;
-
+    
+    img{
+      width: 180px;
+      margin-left: 10px;
+    }
     h1{
       font-family: 'Playball';
       font-style: normal;  
@@ -81,7 +85,8 @@ export default function Cadastro() {
   const Entradas = styled.div`
     display: flex;
     flex-direction: column;
-
+    margin-top: 32px; 
+    
     input{
       width: 303px;
       height: 45px;
@@ -92,7 +97,7 @@ export default function Cadastro() {
       margin-bottom: 6px;
     }
   `;
-  const Botão = styled.button`
+  const Botao = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;

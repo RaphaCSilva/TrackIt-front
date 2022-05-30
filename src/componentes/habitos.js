@@ -55,10 +55,10 @@ export default function Habitos() {
             </p>
           </Adicionar>
         </Menusuperior>
-        <EspaçoHabitos>
+        <EspacoHabitos>
           {(clicou) && <Habitocriando cancelou = {fechahabito} atualiza = {atualizahabits}/>}
           {(hbtsfeitos.length !== 0)? hbtsfeitos.map((habit, index)=> <Habito key = {index} text = {habit.name} semana = {habit.days} id = {habit.id} atualiza = {atualizahabits} index = {index}/>): <Texthbt/>}
-        </EspaçoHabitos>
+        </EspacoHabitos>
       </Container>
       <Footer/>
       </>
@@ -109,7 +109,7 @@ const Adicionar = styled.div`
       margin-bottom: 4px;
   }
 `;
-const EspaçoHabitos = styled.div`
+const EspacoHabitos = styled.div`
   padding-bottom: 120px;
   h3 {
     width: 338px;

@@ -12,7 +12,7 @@ export default function Login() {
   const [senha, setSenha] = React.useState("");
   const [load, setLoad] = React.useState(false);
 
-  const {user, setUser} = useContext(UserContext);
+  const {setUser} = useContext(UserContext);
   
   const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login';
   let navigate = useNavigate();
@@ -45,7 +45,7 @@ export default function Login() {
     return (
       <>
       <Iconeprincipal>
-          <img src="" alt =""/>
+          <img src="assets/img/logo.png" alt =""/>
           <h1>TrackIt</h1>
       </Iconeprincipal>
       <Entradas>
@@ -53,9 +53,9 @@ export default function Login() {
           <input type="password" placeholder="  senha" value={senha} onChange={e => setSenha(e.target.value)} disabled = {load}/>
       </Entradas>
       <Cadastrar>
-      <Botão onClick={montarobj} disabled = {load}>
+      <Botao onClick={montarobj} disabled = {load}>
         {(load) ? <Loader/> : <h2>Entrar</h2>}
-      </Botão>
+      </Botao>
       <Link to= '/cadastro'>
         <h3>
         Não tem uma conta? Cadastre-se
@@ -71,7 +71,11 @@ export default function Login() {
     height: 180px;
     margin: auto;
     margin-top: 68px;
+    img{
+      width: 180px;
+      margin-left: 10px;
 
+    }
     h1{
       font-family: 'Playball';
       font-style: normal;  
@@ -84,6 +88,7 @@ export default function Login() {
   const Entradas = styled.div`
     display: flex;
     flex-direction: column;
+    margin-top: 32px;
 
     input{
       width: 303px;
@@ -95,7 +100,7 @@ export default function Login() {
       margin-bottom: 6px;
     }
   `;
-  const Botão = styled.button`
+  const Botao = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
