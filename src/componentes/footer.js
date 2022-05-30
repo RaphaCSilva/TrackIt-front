@@ -65,7 +65,7 @@ const Barrainferior = styled.div`
   .circulo {
     width: 91px;
     height: 91px;
-    margin-bottom: 31px;
+    margin-bottom: 41px;
   }
 `;
 const Text = styled.div`
